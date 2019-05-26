@@ -4,38 +4,23 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { RouterModule } from '@angular/router';
-
-// Requisições Http
-import { HttpClientModule } from '@angular/common/http';
-
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
-import { HomeComponent } from './home/home.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    AdminComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent
-      },{
-        path: 'login',
-        component: LoginComponent
-      },{
-        path: 'admin',
-        component: AdminComponent
-      }
-    ])
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
   providers: [],
   bootstrap: [AppComponent]
